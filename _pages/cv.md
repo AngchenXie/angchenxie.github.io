@@ -9,8 +9,8 @@ redirect_from:
 
 {% include base_path %}
 
-If the embedded PDF below does not load, you can <a href="../assets/CV_AngchenXie.pdf">download it here!</a>
+Check out my CV <a href="../assets/CV_AngchenXie.pdf">here</a>!
 <br/>
 <br/>
 
-<embed src="/files/CV.pdf" type="application/pdf" width="100%" />
+<embed src="../assets/CV_AngchenXie.pdf" type="application/pdf" width="100%" />
