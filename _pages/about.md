@@ -11,7 +11,7 @@ I am a Robotics MS student at CMU since 2025.
 
 I received a bachelor’s degree from Shanghai Jiao Tong University, advised by [Yue Gao](https://gaoyue.sjtu.edu.cn/biography.html), [Yeqiang Qian](https://qianyeqiang.github.io), and [Ming Yang](https://scholar.google.com/citations?user=0TCYA3YAAAAJ&hl=en). I visited Cornell University in 2024, advised by [Tapomayukh Bhattacharjee](https://sites.google.com/site/tapomayukh).
 
-<h2>Research Interests</h2>
+<h2>Research Interest</h2>
 My research interests include equipping robots with foundational knowledge and uncertainty modeling, developing algorithms for knowledge transfer, and leveraging learned representations and uncertainties to facilitate robust, long-term decision-making across tasks. I aim to enable robots to learn the dynamics of the world and adapt to complex and unpredictable environments, achieving generalizable autonomy across diverse situations.
 
 <h2>Education Experience</h2>
