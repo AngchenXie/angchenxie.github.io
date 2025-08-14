@@ -37,7 +37,7 @@ My research interests include equipping robots with foundational knowledge and u
     <span>2025</span>
   </li>
   <li style="display: flex; justify-content: space-between;">
-    <span>China National Scholarship (top 0.2\%)</span>
+    <span>China National Scholarship (top 0.2%)</span>
     <span>2024</span>
   </li>
   <li style="display: flex; justify-content: space-between;">
@@ -45,11 +45,11 @@ My research interests include equipping robots with foundational knowledge and u
     <span>2024</span>
   </li>
   <li style="display: flex; justify-content: space-between;">
-    <span>National First Prize of China Undergraduate Electronics Design Contest (top 1\%)</span>
+    <span>National First Prize of China Undergraduate Electronics Design Contest (top 1%)</span>
     <span>2023</span>
   </li>
   <li style="display: flex; justify-content: space-between;">
-    <span>First Prize of China Undergraduate Mathematical Contest (top 2\%)</span>
+    <span>First Prize of China Undergraduate Mathematical Contest (top 2%)</span>
     <span>2022</span>
   </li>
 </ul>
