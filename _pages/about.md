@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a Robotics MS student at CMU since 2025.
+I am a Robotics MS student at CMU since 2025, advised by [Guanya Shi](https://www.gshi.me) and [Max Simchowitz](https://msimchowitz.github.io).
 
 I received a bachelor’s degree from Shanghai Jiao Tong University, advised by [Yue Gao](https://gaoyue.sjtu.edu.cn/biography.html), [Yeqiang Qian](https://qianyeqiang.github.io), and [Ming Yang](https://scholar.google.com/citations?user=0TCYA3YAAAAJ&hl=en). I visited Cornell University in 2024, advised by [Tapomayukh Bhattacharjee](https://sites.google.com/site/tapomayukh).
 
