@@ -210,24 +210,40 @@ footer {
 }
 :root[data-theme="dark"] .media > img { filter: brightness(.88); }
 
+/* ============ background ============ */
+.sub {
+  font-size: 15px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--faint); margin: 0 0 4px;
+}
+#background .tl-wrap + .sub { margin-top: 42px; }
+.edu { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+.edu-card {
+  display: flex; gap: 13px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 15px 17px; box-shadow: var(--shadow-m);
+}
+.tl-when.plain { color: var(--faint); font-weight: 400; }
+
 /* ============ background timeline ============ */
 /* A real time axis, Jan 2021 -> Sep 2026. Every position below is a date:
    each entry draws its whole span as a coloured bar, so the Cornell visit
    visibly sits inside the SJTU years. Cards live on a 100-column grid so
    the browser still computes honest row heights when text wraps. */
 :root {
-  --c-sjtu:    #c8803a;
-  --c-cornell: #b8433a;
-  --c-cmu:     #3a6ea8;
+  --c-cyberc3: #c8803a;
+  --c-emprise: #b8433a;
+  --c-rl2:     #3f8f7a;
+  --c-lecar:   #3a6ea8;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --c-sjtu:#dd9b52; --c-cornell:#d4625a; --c-cmu:#6fa0d8; }
+  :root:not([data-theme="light"]) { --c-cyberc3:#dd9b52; --c-emprise:#d4625a; --c-rl2:#57ab94; --c-lecar:#6fa0d8; }
 }
-:root[data-theme="dark"] { --c-sjtu:#dd9b52; --c-cornell:#d4625a; --c-cmu:#6fa0d8; }
+:root[data-theme="dark"] { --c-cyberc3:#dd9b52; --c-emprise:#d4625a; --c-rl2:#57ab94; --c-lecar:#6fa0d8; }
 
-.c-sjtu    { --c: var(--c-sjtu); }
-.c-cornell { --c: var(--c-cornell); }
-.c-cmu     { --c: var(--c-cmu); }
+.c-cyberc3 { --c: var(--c-cyberc3); }
+.c-emprise { --c: var(--c-emprise); }
+.c-rl2     { --c: var(--c-rl2); }
+.c-lecar   { --c: var(--c-lecar); }
 
 .tl-wrap { padding: 26px 0 24px; }
 .tl { position: relative; }
@@ -245,8 +261,6 @@ footer {
   background: var(--c);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
 }
-.tl-bar.c-cornell { top: -3px; height: 14px; border-radius: 7px;
-  border: 2px solid var(--surface); }     /* the short visit sits on top of the SJTU bar */
 .tl-tick {
   position: absolute; top: 12px; left: var(--x); width: 1px; height: 5px;
   background: var(--rule); transform: translateX(-50%);
@@ -289,9 +303,11 @@ footer {
   .tl { display: flex; flex-direction: column; }
   .tl-row { display: contents; }
   .tl-card { margin-bottom: 16px; }
-  .tl-card.c-sjtu    { order: 1; }
-  .tl-card.c-cornell { order: 2; }
-  .tl-card.c-cmu     { order: 3; margin-bottom: 0; }
+  .tl-card.c-cyberc3 { order: 1; }
+  .tl-card.c-emprise { order: 2; }
+  .tl-card.c-rl2     { order: 3; }
+  .tl-card.c-lecar   { order: 4; margin-bottom: 0; }
+  .edu { grid-template-columns: 1fr; gap: 14px; }
 }
 
 /* the timeline needs more room per column than the reading column allows */
