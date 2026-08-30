@@ -211,43 +211,63 @@ footer {
 :root[data-theme="dark"] .media > img { filter: brightness(.88); }
 
 /* ============ background timeline ============ */
-/* A real time axis: 2021 -> 2026. Cards sit on a 100-column grid so their
-   horizontal position reflects the actual start date, and the grid keeps
-   the row heights honest even when a card wraps to a third line. */
-.tl-wrap { padding: 30px 0 26px; }
+/* A real time axis, Jan 2021 -> Sep 2026. Every position below is a date:
+   each entry draws its whole span as a coloured bar, so the Cornell visit
+   visibly sits inside the SJTU years. Cards live on a 100-column grid so
+   the browser still computes honest row heights when text wraps. */
+:root {
+  --c-sjtu:    #c8803a;
+  --c-cornell: #b8433a;
+  --c-cmu:     #3a6ea8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --c-sjtu:#dd9b52; --c-cornell:#d4625a; --c-cmu:#6fa0d8; }
+}
+:root[data-theme="dark"] { --c-sjtu:#dd9b52; --c-cornell:#d4625a; --c-cmu:#6fa0d8; }
+
+.c-sjtu    { --c: var(--c-sjtu); }
+.c-cornell { --c: var(--c-cornell); }
+.c-cmu     { --c: var(--c-cmu); }
+
+.tl-wrap { padding: 26px 0 24px; }
 .tl { position: relative; }
-.tl-row { display: grid; grid-template-columns: repeat(100, 1fr); }
-.tl-top { padding-bottom: 30px; }
-.tl-bot { padding-top: 44px; }          /* room for the year labels */
+.tl-row { display: grid; grid-template-columns: repeat(100, minmax(0, 1fr)); }
+.tl-top { padding-bottom: 26px; }
+.tl-bot { padding-top: 46px; }          /* clears the year labels */
 
 .tl-axis {
-  position: relative; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--rule), var(--accent) 55%, var(--rule));
-  opacity: .8;
+  position: relative; height: 8px; border-radius: 4px;
+  background: color-mix(in srgb, var(--rule) 60%, transparent);
 }
+.tl-bar {
+  position: absolute; top: 0; height: 8px; border-radius: 4px;
+  left: var(--a); width: calc(var(--b) - var(--a));
+  background: var(--c);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
+}
+.tl-bar.c-cornell { top: -3px; height: 14px; border-radius: 7px;
+  border: 2px solid var(--surface); }     /* the short visit sits on top of the SJTU bar */
 .tl-tick {
-  position: absolute; top: -3px; left: var(--x); width: 1px; height: 8px;
+  position: absolute; top: 12px; left: var(--x); width: 1px; height: 5px;
   background: var(--rule); transform: translateX(-50%);
 }
 .tl-year {
-  position: absolute; top: 12px; left: var(--x); transform: translateX(-50%);
-  font-size: 13px; color: var(--faint); font-variant-numeric: tabular-nums; white-space: nowrap;
+  position: absolute; top: 19px; left: var(--x); transform: translateX(-50%);
+  font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
 }
-.tl-year:first-of-type { transform: none; }                    /* keep 2021 inside the track */
-.tl-year:last-of-type  { transform: translateX(-100%); }       /* and 2026 too */
-.tl-dot {
-  position: absolute; top: 50%; left: var(--x); width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
-  border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); z-index: 2;
+.tl-year:first-of-type { transform: none; }
+.tl-year:last-of-type  { transform: translateX(-100%); }
+.tl-link {
+  position: absolute; left: var(--x); width: 0;
+  border-left: 2px dotted color-mix(in srgb, var(--c) 65%, transparent);
 }
-.tl-dot::before {
-  content: ""; position: absolute; left: 50%; width: 0; border-left: 1px dashed var(--rule);
-}
-.tl-dot.up::before   { bottom: 100%; height: 30px; }
-.tl-dot.down::before { top: 100%;    height: 44px; }
+.tl-link.up   { bottom: 100%; height: 26px; }
+.tl-link.down { top: 100%;    height: 46px; }
 
 .tl-card {
   display: flex; gap: 13px; align-items: flex-start;
   background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--c);
   border-radius: 14px; padding: 15px 17px; box-shadow: var(--shadow-m);
 }
 .tl-logo {
@@ -256,17 +276,22 @@ footer {
 }
 .tl-body { display: flex; flex-direction: column; min-width: 0; }
 .tl-body b { font-size: 16px; line-height: 1.3; }
-.tl-when  { color: var(--faint); font-size: 13.5px; }
+.tl-when  { color: var(--c); font-size: 13.5px; font-weight: 500; }
 .tl-where { color: var(--muted); font-size: 14.5px; }
 
 
 @media (max-width: 780px) {
-  /* the axis cannot survive a narrow column - fall back to a plain stack */
+  /* the axis cannot survive a narrow column - fall back to a plain stack.
+     `display: contents` lifts the cards out of their rows so all three can be
+     ordered chronologically instead of top-row-then-bottom-row. */
   .tl-wrap { padding: 4px 0 0; }
   .tl-axis { display: none; }
-  .tl-row { display: block; padding: 0; }
+  .tl { display: flex; flex-direction: column; }
+  .tl-row { display: contents; }
   .tl-card { margin-bottom: 16px; }
-  .tl-bot .tl-card:last-child { margin-bottom: 0; }
+  .tl-card.c-sjtu    { order: 1; }
+  .tl-card.c-cornell { order: 2; }
+  .tl-card.c-cmu     { order: 3; margin-bottom: 0; }
 }
 
 /* the timeline needs more room per column than the reading column allows */
