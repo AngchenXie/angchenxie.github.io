@@ -18,3 +18,12 @@ package-lock.json
 
 # Ignore folders related to IDEs
 .vscode/
+
+# separate repo cloned in here for CV work, not part of the site
+CV_AngchenXie/
+
+# text drafts for editing; index.html stays the source of truth
+content/
+
+# macOS junk
+.DS_Store
