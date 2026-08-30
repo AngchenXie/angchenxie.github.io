@@ -211,39 +211,42 @@ footer {
 :root[data-theme="dark"] .media > img { filter: brightness(.88); }
 
 /* ============ background timeline ============ */
-/* the rail sits on the page ground; each entry is its own card */
-.tl-wrap { padding: 34px 0 30px; }
-.tl {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 2px 1fr;
-  column-gap: 18px; position: relative;
-}
-.tl::before {
-  content: ""; grid-column: 1 / -1; grid-row: 2;
-  height: 2px; border-radius: 2px;
+/* A real time axis: 2021 -> 2026. Cards sit on a 100-column grid so their
+   horizontal position reflects the actual start date, and the grid keeps
+   the row heights honest even when a card wraps to a third line. */
+.tl-wrap { padding: 30px 0 26px; }
+.tl { position: relative; }
+.tl-row { display: grid; grid-template-columns: repeat(100, 1fr); }
+.tl-top { padding-bottom: 30px; }
+.tl-bot { padding-top: 44px; }          /* room for the year labels */
+
+.tl-axis {
+  position: relative; height: 2px; border-radius: 2px;
   background: linear-gradient(90deg, var(--rule), var(--accent) 55%, var(--rule));
-  opacity: .55;
+  opacity: .8;
 }
-.tl-item { position: relative; display: flex; }
-.tl-item:nth-child(1) { grid-column: 1; }
-.tl-item:nth-child(2) { grid-column: 2; }
-.tl-item:nth-child(3) { grid-column: 3; }
-.tl-above { grid-row: 1; align-items: flex-end;  padding-bottom: 28px; }
-.tl-below { grid-row: 3; align-items: flex-start; padding-top: 28px; }
-.tl-item::after {
-  content: ""; position: absolute; left: 50%; width: 9px; height: 9px; margin-left: -4.5px;
-  border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); z-index: 1;
+.tl-tick {
+  position: absolute; top: -3px; left: var(--x); width: 1px; height: 8px;
+  background: var(--rule); transform: translateX(-50%);
 }
-.tl-above::after { bottom: -5.5px; }
-.tl-below::after { top: -5.5px; }
-.tl-item::before {
+.tl-year {
+  position: absolute; top: 12px; left: var(--x); transform: translateX(-50%);
+  font-size: 13px; color: var(--faint); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.tl-year:first-of-type { transform: none; }                    /* keep 2021 inside the track */
+.tl-year:last-of-type  { transform: translateX(-100%); }       /* and 2026 too */
+.tl-dot {
+  position: absolute; top: 50%; left: var(--x); width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); z-index: 2;
+}
+.tl-dot::before {
   content: ""; position: absolute; left: 50%; width: 0; border-left: 1px dashed var(--rule);
 }
-.tl-above::before { bottom: 0; height: 28px; }
-.tl-below::before { top: 0; height: 28px; }
+.tl-dot.up::before   { bottom: 100%; height: 30px; }
+.tl-dot.down::before { top: 100%;    height: 44px; }
 
 .tl-card {
-  display: flex; gap: 13px; align-items: flex-start; width: 100%;
+  display: flex; gap: 13px; align-items: flex-start;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 14px; padding: 15px 17px; box-shadow: var(--shadow-m);
 }
@@ -258,14 +261,12 @@ footer {
 
 
 @media (max-width: 780px) {
-  /* the rail does not survive a narrow column; fall back to a plain stack */
+  /* the axis cannot survive a narrow column - fall back to a plain stack */
   .tl-wrap { padding: 4px 0 0; }
-  .tl { display: block; }
-  .tl::before { display: none; }
-  .tl-item { grid-column: auto !important; grid-row: auto !important;
-             padding: 0 0 18px !important; align-items: flex-start; }
-  .tl-item:last-child { padding-bottom: 0 !important; }
-  .tl-item::before, .tl-item::after { display: none; }
+  .tl-axis { display: none; }
+  .tl-row { display: block; padding: 0; }
+  .tl-card { margin-bottom: 16px; }
+  .tl-bot .tl-card:last-child { margin-bottom: 0; }
 }
 
 /* the timeline needs more room per column than the reading column allows */
