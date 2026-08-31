@@ -8,8 +8,9 @@
   --border:   #e7e1d6;
   --rule:     #ded7ca;
   --accent:   #2c4a78;
-  --badge-bg: #ecefF5;
-  --badge-fg: #35507d;
+  --badge-bg: #e9eef7;
+  --badge-fg: #2c4a78;
+  --badge-br: #b9c8de;
   --tag-bg:   #efeade;
   --shadow-s: 0 1px 2px rgba(35,30,20,.05);
   --shadow-m: 0 1px 3px rgba(35,30,20,.05), 0 10px 30px rgba(35,30,20,.045);
@@ -28,8 +29,9 @@
     --border:   #262b33;
     --rule:     #2c323b;
     --accent:   #9dbdf0;
-    --badge-bg: #1c2637;
+    --badge-bg: #1b2536;
     --badge-fg: #9dbdf0;
+    --badge-br: #35496b;
     --tag-bg:   #1d2128;
     --shadow-s: none;
     --shadow-m: 0 1px 3px rgba(0,0,0,.4);
@@ -45,8 +47,9 @@
   --border:   #262b33;
   --rule:     #2c323b;
   --accent:   #9dbdf0;
-  --badge-bg: #1c2637;
+  --badge-bg: #1b2536;
   --badge-fg: #9dbdf0;
+  --badge-br: #35496b;
   --tag-bg:   #1d2128;
   --shadow-s: none;
   --shadow-m: 0 1px 3px rgba(0,0,0,.4);
@@ -79,7 +82,7 @@ a:hover { text-decoration-color: var(--ink); }
 /* ============ nav ============ */
 .nav {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: var(--bg); background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
 }
@@ -157,9 +160,8 @@ h3 a:hover { text-decoration: underline; text-decoration-color: var(--rule); }
 .venue { margin: 0 0 10px; }
 .vbadge {
   display: inline-block; font-size: 13.5px; font-weight: 600; letter-spacing: .03em;
-  border-radius: 6px; padding: 2px 9px; color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  border-radius: 6px; padding: 2px 9px;
+  color: var(--badge-fg); border: 1px solid var(--badge-br); background: var(--badge-bg);
   font-family: "Source Serif 4", Georgia, serif;
 }
 .vbadge.plain {                       /* not published yet - deliberately quieter */
@@ -262,13 +264,12 @@ footer {
 
 .tl-axis {
   position: relative; height: 8px; border-radius: 4px;
-  background: color-mix(in srgb, var(--rule) 60%, transparent);
+  background: var(--rule);
 }
 .tl-bar {
   position: absolute; top: 0; height: 8px; border-radius: 4px;
   left: var(--a); width: calc(var(--b) - var(--a));
   background: var(--c);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 35%, transparent);
 }
 .tl-tick {
   position: absolute; top: 12px; left: var(--x); width: 1px; height: 5px;
@@ -282,7 +283,7 @@ footer {
 .tl-year:last-of-type  { transform: translateX(-100%); }
 .tl-link {
   position: absolute; left: var(--x); width: 0;
-  border-left: 2px dotted color-mix(in srgb, var(--c) 65%, transparent);
+  border-left: 2px dotted var(--c); opacity: .6;
 }
 .tl-link.up   { bottom: 100%; height: 26px; }
 .tl-link.down { top: 100%;    height: 46px; }
