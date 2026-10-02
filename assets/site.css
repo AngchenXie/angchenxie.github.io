@@ -167,6 +167,9 @@ h3 a:hover { text-decoration: underline; text-decoration-color: var(--rule); }
 .vbadge.plain {                       /* not published yet - deliberately quieter */
   color: var(--faint); border-color: var(--border); background: transparent;
 }
+.pub-award {                          /* award attached to this paper, under its venue */
+  font-size: 14.5px; color: var(--muted); margin: -4px 0 11px;
+}
 .pub-tldr { font-size: 16.5px; color: var(--muted); margin: 0 0 13px; }
 .pub-links { display: flex; flex-wrap: wrap; gap: 16px; font-size: 15px; }
 .pub-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; }
